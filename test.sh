@@ -9,7 +9,7 @@ assert() {
   actual="$?"
 
   if [ "$actual" = "$expected" ]; then
-    echo "$input => $actual"
+    echo -e "$input => $actual ...\e[32m ok \e[m"
   else
     echo "$input => $expected expected, but got $actual"
     exit 1
@@ -48,4 +48,4 @@ assert 0 '1>=2;'
 
 assert 3 '1; 2; 3;'
 
-echo OK
+echo "All tests are OK."
