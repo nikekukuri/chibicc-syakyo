@@ -14,10 +14,11 @@ typedef struct Node Node;
 
 // Token
 typedef enum {
-	TK_IDENT, // Identifiers
-	TK_PUNCT, // punctuators
-	TK_NUM,		// Numeric literals
-	TK_EOF,		// End-of-files markers
+	TK_IDENT,   // Identifiers
+	TK_PUNCT,   // punctuators
+	TK_KEYWORD, // Keywords
+	TK_NUM,		  // Numeric literals
+	TK_EOF,		  // End-of-files markers
 } TokenKind;
 
 // Token type
@@ -67,7 +68,10 @@ typedef enum {
   ND_NE,        // !=
   ND_LT,        // <
   ND_LE,        // <=
-  ND_ASSIGN,    // <=
+  ND_ASSIGN,    // =
+  ND_RETURN,    // "return"
+  ND_IF,				// "if"
+  ND_BLOCK,     // { ... }
   ND_EXPR_STMT, // Expression statement
   ND_VAR,       // Variable
   ND_NUM,       // Integer
@@ -77,8 +81,18 @@ typedef enum {
 struct Node {
 	NodeKind kind; // Node kind
 	Node *next;		 // Next node
+
 	Node *lhs;		 // Left-hand side
 	Node *rhs;		 // Right-hand side
+
+	// "if" statement
+	Node *cond;
+	Node *then;
+	Node *els;
+
+	// Block
+	Node *body;
+
 	Obj *var;	  	 // Used if kind == ND_VAR
 	int val;			 // Used if kind == ND_NUM
 };

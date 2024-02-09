@@ -11,6 +11,6 @@ test: chibicc
 	./test.sh
 
 clean:
-	rm -f chibicc *.o *~ tmp*
+	rm -f chibicc *.o *~ tmp* log.txt
 
 .PHONY: test clean
